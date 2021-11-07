@@ -4,27 +4,23 @@ const regex = {
         script: /<script[\s\S]*?>[\s\S]*?<\/script>/gi,
         scriptJS: /<script>[\s\S]*?<\/script>/gi,
         scriptTS: /<script lang="ts">[\s\S]*?<\/script>/gi,
-        propsGeneric: new RegExp(`export let (.*?);`, `gm`)
+        propsGeneric: /export let [\s\S]*?;/gi
 };
-
-function getProps (component:string): Array<string> | null {
-    
-    if (hasScriptJS(component)) {
-        return regex.scriptJS.exec(component);
-    } else if (hasScriptTS(component)) {
-        return regex.scriptTS.exec(component);
-    }
-    return null;
-}
-
 
 function hasScript (component:string): Reading {
     const script = component.match(regex.script);
+    const content = script == null ? "": script[0].replace(/<script[\s\S]*?>/gi, "").replace(/<\/script>/gi, "");
     const result: Reading = {
         status: script == null ? false : true,
-        content: script == null ? "": script[0]
+        content
     };
     return result;
+}
+
+function hasScriptJSorTS (component:string):boolean {
+    const scriptTS = component.match(regex.scriptTS);
+    const scriptJS = component.match(regex.scriptJS);
+    return scriptTS == null && scriptJS == null ? false : true;
 }
 
 function hasScriptJS (component:string):boolean {
@@ -37,10 +33,14 @@ function hasScriptTS (component:string):boolean {
     return script == null ? false : true;
 }
 
-function hasScriptJSorTS (component:string):boolean {
-    const scriptTS = component.match(regex.scriptTS);
-    const scriptJS = component.match(regex.scriptJS);
-    return scriptTS == null && scriptJS == null ? false : true;
+function hasProps(component:string):boolean {
+    const content = component.match(regex.propsGeneric);
+    return content != null;
 }
 
-export {getProps, hasScript, hasScriptJSorTS, hasScriptJS, hasScriptTS};
+function getProps_asInFile (component:string): Array<string> {
+    const content = component.match(regex.propsGeneric);
+    return content != null ? content : [];
+}
+
+export { hasScript, hasScriptJSorTS, hasScriptJS, hasScriptTS, hasProps, getProps_asInFile };
