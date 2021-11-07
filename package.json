@@ -1,5 +1,5 @@
 {
-  "name": "@el3um4s/typescript-npm-package-starter",
+  "name": "@el3um4s/svelte-info-component",
   "version": "0.0.1",
   "description": "Typescript NPM Package Starter",
   "main": "lib/index.js",

@@ -1,16 +1,7 @@
 import { existsSync, readFileSync  } from 'fs';
 import { toTry } from "@el3um4s/to-try";
 
-
-interface Content {
-    error: Reading;
-    content: Reading;
-}
-
-interface Reading {
-    status: boolean;
-    content: string;
-}
+import { Content } from "./interfaces";
 
 function readFileSvelte(nameFile:string) {
     const content:Content = {
@@ -43,7 +34,7 @@ function readFileSvelte(nameFile:string) {
         }
 
     } else {
-        content.error.content = "File not exist";
+        content.error.content = `File "${nameFile}" not exist`;
     }
 
     
