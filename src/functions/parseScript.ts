@@ -1,10 +1,23 @@
 import acorn = require("acorn");
+import walk = require("acorn-walk");
 
 function getAST(s:string):acorn.Node {
-   // eslint-disable-next-line @typescript-eslint/no-var-requires
-   // const acorn = require("acorn");
-   const ast =acorn.parse(s, {ecmaVersion: "latest", sourceType:"module"});
+   const ast = acorn.parse(s, {ecmaVersion: "latest", sourceType:"module", locations: true});
    return ast;
 }
 
-export {getAST};
+function getArryOfExportedNameDeclaration(s:acorn.Node):Array<acorn.Node> {
+   const result: Array<acorn.Node> = [];
+   walk.simple(s, {
+      ExportNamedDeclaration(node) {
+         result.push(node);
+      }
+   });
+
+   return result;
+}
+
+// function convertExportedNameToObject(s:acorn.Node) {}
+
+
+export {getAST, getArryOfExportedNameDeclaration};

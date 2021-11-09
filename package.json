@@ -65,6 +65,8 @@
   },
   "dependencies": {
     "@el3um4s/to-try": "^0.0.2",
-    "acorn-loose": "^8.2.1"
+    "@types/acorn": "^4.0.6",
+    "acorn-loose": "^8.2.1",
+    "acorn-walk": "^7.2.0"
   }
 }

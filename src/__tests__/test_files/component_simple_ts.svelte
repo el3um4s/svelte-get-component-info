@@ -1,3 +1,3 @@
 <script lang="ts">
-  export let propGeneric: string;
+  export let propGeneric: string = "ciao";
 </script>
