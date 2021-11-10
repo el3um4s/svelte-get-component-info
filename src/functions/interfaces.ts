@@ -7,3 +7,7 @@ export interface Reading {
     status: boolean;
     content: string;
 }
+
+export interface Prop {
+    name: string;
+}

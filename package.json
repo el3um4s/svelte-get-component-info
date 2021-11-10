@@ -8,6 +8,7 @@
     "build": "tsc",
     "lint": "eslint . --ext .ts",
     "test": "jest --config jestconfig.json",
+    "test:no-coverage": "jest --config jestconfig.json --coverage=false",
     "prepare": "npm run build",
     "prepublishOnly": "npm test && npm run lint",
     "preversion": "npm run lint",
