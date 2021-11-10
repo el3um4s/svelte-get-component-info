@@ -48,14 +48,13 @@
   "homepage": "https://github.com/el3um4s/svelte-info-component#readme",
   "devDependencies": {
     "@types/jest": "^27.0.2",
-    "@types/node": "^16.11.6",
-    "@typescript-eslint/eslint-plugin": "^5.3.0",
-    "@typescript-eslint/parser": "^5.3.0",
-    "ansi-regex": ">=6.0.1",
+    "@types/node": "^16.11.7",
+    "@typescript-eslint/eslint-plugin": "^5.3.1",
+    "@typescript-eslint/parser": "^5.3.1",
     "eslint": "^8.2.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-config-standard": "^16.0.3",
-    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.1",
     "jest": "^27.3.1",
@@ -63,6 +62,6 @@
     "typescript": "^4.4.4"
   },
   "dependencies": {
-    "@el3um4s/to-try": "^0.0.2"
+    "@el3um4s/to-try": "^0.0.5"
   }
 }
