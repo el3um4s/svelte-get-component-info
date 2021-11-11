@@ -10,4 +10,6 @@ export interface Reading {
 
 export interface Prop {
     name: string;
+    type: string;
+    defaultValue: string|undefined;
 }

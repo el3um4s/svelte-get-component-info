@@ -17,22 +17,6 @@ function hasScript (component:string): Reading {
     return result;
 }
 
-function hasScriptJSorTS (component:string):boolean {
-    const scriptTS = component.match(regex.scriptTS);
-    const scriptJS = component.match(regex.scriptJS);
-    return scriptTS == null && scriptJS == null ? false : true;
-}
-
-function hasScriptJS (component:string):boolean {
-    const script = component.match(regex.scriptJS);
-    return script == null ? false : true;
-}
-
-function hasScriptTS (component:string):boolean {
-    const script = component.match(regex.scriptTS);
-    return script == null ? false : true;
-}
-
 function hasProps(component:string):boolean {
     const content = component.match(regex.propsGeneric);
     return content != null;
@@ -43,4 +27,4 @@ function getProps_asInFile (component:string): Array<string> {
     return content != null ? content : [];
 }
 
-export { hasScript, hasScriptJSorTS, hasScriptJS, hasScriptTS, hasProps, getProps_asInFile };
+export { hasScript, hasProps, getProps_asInFile };

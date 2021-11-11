@@ -1,5 +1,5 @@
 import { readFileSvelte } from "../functions/readFileSvelte";
-import { hasScriptJS, hasScriptTS, hasScript, hasScriptJSorTS, hasProps, getProps_asInFile } from "../functions/parseFileSvelte";
+import { hasScript, hasProps, getProps_asInFile } from "../functions/parseFileSvelte";
 import type { Content } from "../functions/interfaces";
 
 
@@ -23,36 +23,6 @@ describe("Parse Svelte - SCRIPTS - Check Scripts", () => {
         const content: string = file.content.content;
         const hasScriptGeneric: boolean = hasScript(content).status;
         expect(hasScriptGeneric).toBeTruthy();
-    });
-
-    test("has script (generic - JS or TS)", () => {
-        const file: Content = readFileSvelte(listFiles.component_TS);
-        const content: string = file.content.content;
-        const hasScriptGeneric: boolean = hasScriptJSorTS(content);
-        expect(hasScriptGeneric).toBeTruthy();
-    });
-
-    test("has script (JS)", () => {
-        const file: Content = readFileSvelte(listFiles.component_JS);
-        const content: string = file.content.content;
-        expect(hasScriptJS(content)).toBeTruthy();
-        expect(hasScriptTS(content)).toBeFalsy();
-    });
-
-    test("has script (TS)", () => {
-        const file: Content = readFileSvelte(listFiles.component_TS);
-        const content: string = file.content.content;
-        expect(hasScriptJS(content)).toBeFalsy();
-        expect(hasScriptTS(content)).toBeTruthy();
-    });
-
-    test("has script (TS)", () => {
-        const file: Content = readFileSvelte(listFiles.component_NO_SCRIPT);
-        const content: string = file.content.content;
-        expect(hasScript(content).status).toBeFalsy();
-        expect(hasScriptJSorTS(content)).toBeFalsy();
-        expect(hasScriptJS(content)).toBeFalsy();
-        expect(hasScriptTS(content)).toBeFalsy();
     });
 });
 
