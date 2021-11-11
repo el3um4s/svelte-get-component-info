@@ -29,4 +29,9 @@ function getPropType(s:string):string {
     return type;
 }
 
-export {getPropInfo, getPropName, getPropType};
+function getPropDefaultValue(s:string):string {
+    const positionEquals = s.indexOf("=");
+    
+}
+
+export {getPropInfo, getPropName, getPropType, getPropDefaultValue};
