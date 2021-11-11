@@ -3,7 +3,8 @@ import { isStringType, getStringWithoutQuote } from "./utils";
 
 const regex = {
         name: /(?<=let )(.*?)(?=\s|;|=|:)/,
-        type: /(?<=let [S:]|[Ss:])(.*?)(?=;|=)/
+        type: /(?<=let [:]|[:])(.*?)(?=;|=)/
+        // type: /(?<=let [S:]|[Ss:])(.*?)(?=;|=)/
 };
 
 function getPropInfo(s:string):Prop {

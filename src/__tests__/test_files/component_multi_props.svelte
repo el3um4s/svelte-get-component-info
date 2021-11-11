@@ -28,12 +28,12 @@
     { name: "no type 2" },
     { name: "no type 3" },
   ];
-  export let array_object_yesType: object = [
+  export let array_object_yesType: Array<object> = [
     { name: "yes type" },
     { name: "yes type 2" },
     { name: "yes type 3" },
   ];
-  export let array_object_yesType_noValue: object;
+  export let array_object_yesType_noValue: Array<object>;
 
   export let object_complex_noType = { name: "no type", value: "complex" };
   export let object_complex_yesType: object = {

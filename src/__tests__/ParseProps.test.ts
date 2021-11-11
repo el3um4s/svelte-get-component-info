@@ -47,6 +47,9 @@ const listTest: Array<{prop: string, expectedName: string, expectedType: string|
         {prop: 'export let obj:{a:string, b:string} = {a: ":", b: "a"};', expectedName:"obj", expectedType:"{a:string, b:string}", expectedDefaultValue:`{a: ":", b: "a"}`},
         {prop: 'export let obj:{a:string, b:string} = {a: "=", b: "a"};', expectedName:"obj", expectedType:"{a:string, b:string}", expectedDefaultValue:`{a: "=", b: "a"}`},
         {prop: 'export let obj:{a:string, b:string} = {a: ";", b: "a"};', expectedName:"obj", expectedType:"{a:string, b:string}", expectedDefaultValue:`{a: ";", b: "a"}`},
+        {prop: 'export let string_noType = "a - no type";', expectedName:"string_noType", expectedType:undefined, expectedDefaultValue:`a - no type`},
+        {prop: 'export let string_yesType: string = "a - yes type";', expectedName:"string_yesType", expectedType:"string", expectedDefaultValue:`a - yes type`},
+        {prop: 'export let string_yesType_noValue: string;', expectedName:"string_yesType_noValue", expectedType:"string", expectedDefaultValue:undefined},
     ];
 
 describe("Parse Svelte - PROPS - get informations", () => {

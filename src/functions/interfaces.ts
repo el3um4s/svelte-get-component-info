@@ -13,3 +13,7 @@ export interface Prop {
     type: string|undefined;
     defaultValue: string|undefined;
 }
+
+export interface SvelteInformations {
+    props: Array<Prop>;
+}

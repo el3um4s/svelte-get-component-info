@@ -1,6 +1,3 @@
-// const myCustomFunction = (name: string):string => `Hello ${name}`;
-// function ciao(name: string): string {
-//     return `Ciao ${name}`;
-// }
+import getInfo from "./functions/getInfo";
 
-// export { myCustomFunction, ciao};
+export default getInfo;
