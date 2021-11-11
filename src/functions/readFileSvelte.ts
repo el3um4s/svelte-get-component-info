@@ -19,9 +19,7 @@ function readFileSvelte(nameFile:string) {
 
         const [result, error] = toTry(() => readFileSync(nameFile));
 
-        if (error || result == null) {
-            content.error.content = `Error reading the file "${nameFile}"`;
-        } else {
+        if (!error && result) {
             const contentString = result.toString();
             content.error = {
                 status: false,
@@ -35,9 +33,7 @@ function readFileSvelte(nameFile:string) {
 
     } else {
         content.error.content = `File "${nameFile}" not exist`;
-    }
-
-    
+    }  
     
     return content;
 }
