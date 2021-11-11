@@ -7,9 +7,9 @@ const regex = {
 };
 
 function getPropInfo(s:string):Prop {
-    const name = getPropName(s);
-    const type = getPropType(s);
-    const defaultValue = getPropDefaultValue(s);
+    const name:string = getPropName(s);
+    const type:string|undefined = getPropType(s);
+    const defaultValue:string|undefined = getPropDefaultValue(s);
     return {name, type, defaultValue};
 }
 
@@ -20,13 +20,13 @@ function getPropName(s:string):string {
     return name;
 }
 
-function getPropType(s:string):string {
+function getPropType(s:string):string|undefined {
     const typeRegex = s.match(regex.type);
     const positionEquals = s.indexOf("=");
     const positionSemicolon = s.indexOf(";");
     const firstDelimiters:number = positionEquals > -1 ? positionEquals : positionSemicolon;
     const positionRegex:number = typeRegex?.index ? typeRegex.index : -1;
-    const type = positionRegex < firstDelimiters ? typeRegex ? typeRegex[0].trim() : "" : "";
+    const type:string|undefined = positionRegex < firstDelimiters && typeRegex ? typeRegex[0].trim() : undefined;
     return type;
 }
 
