@@ -27,18 +27,18 @@ It is still a work in progress project. My idea is to get an item like this:
 
 ```json
 {
-    props: [
-        { name: "color", type:"string", defaultValue:"red" },
-        { name: "steps", type:"number", defaultValue:"8" }
-        { name: "title", type:"string", defaultValue:undefined },
-        { name: "description", type:undefined, defaultValue:undefined}
+    "props": [
+        { "name": "color", "type":"string", "defaultValue":"red" },
+        { "name": "steps", "type":"number", "defaultValue":"8" }
+        { "name": "title", "type":"string", "defaultValue":undefined },
+        { "name": "description", "type":undefined, "defaultValue":undefined}
     ],
-    actions: [
+    "actions": [
         "click",
         "hover",
         "customAction"
     ],
-    slots: [
+    "slots": [
         "",
         "header",
         "footer"
