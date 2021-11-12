@@ -1,3 +1,3 @@
-import getInfo from "./functions/getInfo";
+import {getInfo} from "./functions/getInfo";
 
-export default getInfo;
+export {getInfo};

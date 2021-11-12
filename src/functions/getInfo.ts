@@ -11,4 +11,4 @@ function getInfo(source: string):SvelteInformations {
     return { props };
 }
 
-export default getInfo;
+export {getInfo};
