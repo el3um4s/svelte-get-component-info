@@ -2,7 +2,7 @@
 
 _A function to extract information about the props of a Svelte file. Designed to simplify the creation of documentation_
 
-NPM link: [@el3um4s/typescript-npm-package-starter](https://www.npmjs.com/package/@el3um4s/svelte-get-component-info)
+NPM link: [@el3um4s/svelte-get-component-info](https://www.npmjs.com/package/@el3um4s/svelte-get-component-info)
 
 ### Install and use the package
 
