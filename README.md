@@ -15,9 +15,10 @@ npm i @el3um4s/svelte-get-component-info
 and then in a file:
 
 ```ts
+import type { SvelteInformations } from "@el3um4s/svelte-get-component-info";
 import { getInfo } from "@el3um4s/svelte-get-component-info";
 
-const info = getInfo("./src/lib/hello.svelte");
+const info: SvelteInformations = getInfo("./src/lib/hello.svelte");
 console.log(info.props); //  [{ name: "message", type: "string", defaultValue: "Hello World" }]
 ```
 
@@ -30,8 +31,8 @@ It is still a work in progress project. My idea is to get an item like this:
     "props": [
         { "name": "color", "type":"string", "defaultValue":"red" },
         { "name": "steps", "type":"number", "defaultValue":"8" }
-        { "name": "title", "type":"string", "defaultValue":undefined },
-        { "name": "description", "type":undefined, "defaultValue":undefined}
+        { "name": "title", "type":"string" },
+        { "name": "description"}
     ],
     "actions": [
         "click",

@@ -10,8 +10,8 @@ export interface Reading {
 
 export interface Prop {
     name: string;
-    type: string|undefined;
-    defaultValue: string|undefined;
+    type?: string;
+    defaultValue?: string;
 }
 
 export interface SvelteInformations {
