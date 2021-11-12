@@ -1,4 +1,4 @@
-import getInfo from "../index";
+import {getInfo} from "../index";
 
 import {SvelteInformations, Prop} from "../functions/interfaces";
 
