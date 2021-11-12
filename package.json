@@ -28,8 +28,12 @@
   "keywords": [
     "typescript",
     "npm",
-    "template",
-    "ts"
+    "ts",
+    "svelte",
+    "documentation",
+    "autogenerator",
+    "sveltejs",
+    "sveltekit"
   ],
   "author": "Samuele C. De Tomasi",
   "license": "MIT",
