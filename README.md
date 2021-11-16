@@ -20,6 +20,7 @@ import { getInfo } from "@el3um4s/svelte-get-component-info";
 
 const info: SvelteInformations = getInfo("./src/lib/hello.svelte");
 console.log(info.props); //  [{ name: "message", type: "string", defaultValue: "Hello World" }]
+console.log(info.actions); /// [ { name: "notify" }]
 ```
 
 ### Note
@@ -35,9 +36,9 @@ It is still a work in progress project. My idea is to get an item like this:
         { "name": "description"}
     ],
     "actions": [
-        "click",
-        "hover",
-        "customAction"
+        { "name": "click" },
+        { "name": "hover" },
+        { "name": "customAction" }
     ],
     "slots": [
         "",
@@ -53,7 +54,9 @@ It is still a work in progress project. My idea is to get an item like this:
   - [x] name
   - [x] type
   - [x] defaultValue
-- [ ] actions
+  - [ ] class CSS
+- [x] actions
 - [ ] slots
   - [ ] anonyms
   - [ ] named
+- [ ] css variables

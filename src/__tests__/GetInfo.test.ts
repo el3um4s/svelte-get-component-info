@@ -1,6 +1,6 @@
 import {getInfo} from "../index";
 
-import {SvelteInformations, Prop} from "../functions/interfaces";
+import {SvelteInformations, Prop, Action} from "../functions/interfaces";
 
 const listFiles = {
     component_JS: "src/__tests__/test_files/component_simple_js.svelte",
@@ -10,13 +10,13 @@ const listFiles = {
 };
 
 
-const listCheckValues: Array<Prop> = [
+const listCheckValuesProps: Array<Prop> = [
     {
         name: `string_noType`,
         type: undefined,
         defaultValue: `a - no type`
     },
-        {
+    {
         name: `string_yesType`,
         type: `string`,
         defaultValue: `a - yes type`
@@ -183,7 +183,14 @@ const listCheckValues: Array<Prop> = [
 ];
 
 
-describe("Parse svelte files", () => {
+const listCheckValueActions: Array<Action> = [
+    { name: "message" },
+    { name: "notify" },
+    { name: "claps" },
+    { name: "click" } 
+];
+
+describe("Parse svelte files - SCRIPTS", () => {
     test("parse file with no script", () => {
         const result:SvelteInformations = getInfo(listFiles.component_NO_SCRIPT);
         expect(result.props.length).toBe(0);
@@ -210,9 +217,42 @@ describe("Parse Svelte - check props", () => {
         const props:Array<Prop> = result.props;
         props.forEach((prop:Prop, index:number) => {
             test(`check prop: name=${prop.name} - type=${prop.type}`, () => {
-                expect(prop.name).toBe(listCheckValues[index].name);
-                expect(prop.type).toBe(listCheckValues[index].type);
-                expect(prop.defaultValue?.replace(/(\r\n|\n|\r)/gm, "")).toBe(listCheckValues[index].defaultValue?.trim()?.replace(/(\r\n|\n|\r)/gm, ""));
+                expect(prop.name).toBe(listCheckValuesProps[index].name);
+                expect(prop.type).toBe(listCheckValuesProps[index].type);
+                expect(prop.defaultValue?.replace(/(\r\n|\n|\r)/gm, "")).toBe(listCheckValuesProps[index].defaultValue?.trim()?.replace(/(\r\n|\n|\r)/gm, ""));
+            });
+        });
+});
+
+
+describe("Parse svelte files - ACTIONS", () => {
+    test("parse file with no actions", () => {
+        const result:SvelteInformations = getInfo(listFiles.component_NO_SCRIPT);
+        expect(result.actions.length).toBe(0);
+    });
+    
+    test("parse file with only 1 prop (JS)", () => {
+        const result:SvelteInformations = getInfo(listFiles.component_JS);
+        expect(result.actions.length).toBe(1);
+    });
+
+    test("parse file with only 1 prop (TS)", () => {
+        const result:SvelteInformations = getInfo(listFiles.component_TS);
+        expect(result.actions.length).toBe(1);
+    });
+
+    test("parse file with 4 actions (TS)", () => {
+        const result:SvelteInformations = getInfo(listFiles.component_MULTI);
+        expect(result.actions.length).toBe(4);
+    });
+});
+
+describe("Parse Svelte - check actions", () => {
+        const result:SvelteInformations = getInfo(listFiles.component_MULTI);
+        const actions:Array<Action> = result.actions;
+        actions.forEach((action:Action, index:number) => {
+            test(`check prop: name=${action.name}`, () => {
+                expect(action.name).toBe(listCheckValueActions[index].name);
             });
         });
 });

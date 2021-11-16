@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { createEventDispatcher } from "svelte";
+
+  const dispatch = createEventDispatcher();
+
   export let string_noType = "a - no type";
   export let string_yesType: string = "a - yes type";
   export let string_yesType_noValue: string;
@@ -57,4 +61,28 @@
   export let function_noType = () => "no type";
   export let function_yesType: Function = () => "yes type";
   export let function_yesType_noValue: Function;
+
+  function sayHello() {
+    dispatch("message", {
+      text: "Hello!",
+    });
+  }
+
+  function showNotification() {
+    dispatch("notify", {
+      text: "Hello!",
+    });
+  }
 </script>
+
+<button on:click={sayHello}>Fire Event</button>
+
+<button on:click={showNotification}>Fire Event</button>
+
+<button on:click={() => dispatch("claps", "detail value")}>Fire Event</button>
+
+<div on:click={(e) => dispatch("click", { info: "yeah" })}>
+  Click me and I will dispatch
+</div>
+
+<button on:click={() => dispatch("claps", "detail value")}>Fire Event</button>

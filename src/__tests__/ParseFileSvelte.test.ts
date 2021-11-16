@@ -1,5 +1,5 @@
 import { readFileSvelte } from "../functions/readFileSvelte";
-import { hasScript, hasProps, getProps_asInFile } from "../functions/parseFileSvelte";
+import { hasProps, getProps_asInFile, hasActions, getActions_asInFile } from "../functions/parseFileSvelte";
 import type { Content } from "../functions/interfaces";
 
 
@@ -9,47 +9,6 @@ const listFiles = {
     component_NO_SCRIPT: "src/__tests__/test_files/component_simple_no_script.svelte",
     component_MULTI: "src/__tests__/test_files/component_multi_props.svelte"
 };
-
-describe("Parse Svelte - SCRIPTS - Check Scripts", () => {
-    test("has script (generic - JS)", () => {
-        const file: Content = readFileSvelte(listFiles.component_JS);
-        const content: string = file.content.content;
-        const hasScriptGeneric: boolean = hasScript(content).status;
-        expect(hasScriptGeneric).toBeTruthy();
-    });
-
-    test("has script (generic - TS)", () => {
-        const file: Content = readFileSvelte(listFiles.component_TS);
-        const content: string = file.content.content;
-        const hasScriptGeneric: boolean = hasScript(content).status;
-        expect(hasScriptGeneric).toBeTruthy();
-    });
-});
-
-
-describe("Parse Svelte - SCRIPTS - Get Content", () => {
-    test("read content JS", () => {
-        const file: Content = readFileSvelte(listFiles.component_JS);
-        const content: string = file.content.content;
-        const script:string = hasScript(content).content.trim();
-        expect(script).toBe("export let propGeneric;");
-    });
-
-    test("read content TS", () => {
-        const file: Content = readFileSvelte(listFiles.component_TS);
-        const content: string = file.content.content;
-        const script:string = hasScript(content).content.trim();
-        expect(script).toBe("export let propGeneric: string;");
-    });
-
-    test("read content NO SCRIPT", () => {
-        const file: Content = readFileSvelte(listFiles.component_NO_SCRIPT);
-        const content: string = file.content.content;
-        const script:string = hasScript(content).content.trim();
-        expect(script).toBe("");
-    });
-});
-
 
 describe("Parse Svelte - SCRIPTS - Checks Props", () => {
     test("check has props JS", () => {
@@ -97,5 +56,54 @@ describe("Parse Svelte - SCRIPTS - Checks Props", () => {
         expect(file_no.length).toBe(0);
         const file_multi = getProps_asInFile(readFileSvelte(listFiles.component_MULTI).content.content);
         expect(file_multi.length).toBe(30);
+    });
+});
+
+describe("Parse Svelte - SCRIPTS - Checks Actions", () => {
+    test("check has actions JS", () => {
+        const file: Content = readFileSvelte(listFiles.component_JS);
+        const content: string = file.content.content;
+        const actions: boolean = hasActions(content);
+        expect(actions).toBeTruthy();
+        const listActions: string[] = getActions_asInFile(content);
+        expect(listActions.length).toBe(1);
+        expect(listActions[0].trim()).toBe(`("message"`);
+    });
+
+    test("check has actions TS", () => {
+        const file: Content = readFileSvelte(listFiles.component_TS);
+        const content: string = file.content.content;
+        const actions: boolean = hasActions(content);
+        expect(actions).toBeTruthy();
+        const listActions: string[] = getActions_asInFile(content);
+        expect(listActions.length).toBe(1);
+        expect(listActions[0].trim()).toBe(`("message"`);
+    });
+
+    test("check has actions NO ACTIONS", () => {
+        const file: Content = readFileSvelte(listFiles.component_NO_SCRIPT);
+        const content: string = file.content.content;
+        const actions: boolean = hasActions(content);
+        expect(actions).toBeFalsy();
+        const listActions: string[] = getActions_asInFile(content);
+        expect(listActions.length).toBe(0);
+    });
+
+    test("check has actions MULTI", () => {
+        const file: Content = readFileSvelte(listFiles.component_MULTI);
+        const content: string = file.content.content;
+        const actions: boolean = hasActions(content);
+        expect(actions).toBeTruthy();
+    });
+
+    test("count actions in files", () => {
+        const file_js = getActions_asInFile(readFileSvelte(listFiles.component_JS).content.content);
+        expect(file_js.length).toBe(1);
+        const file_ts = getActions_asInFile(readFileSvelte(listFiles.component_TS).content.content);
+        expect(file_ts.length).toBe(1);
+        const file_no = getActions_asInFile(readFileSvelte(listFiles.component_NO_SCRIPT).content.content);
+        expect(file_no.length).toBe(0);
+        const file_multi = getActions_asInFile(readFileSvelte(listFiles.component_MULTI).content.content);
+        expect(file_multi.length).toBe(5);
     });
 });

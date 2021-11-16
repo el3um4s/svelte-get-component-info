@@ -14,6 +14,11 @@ export interface Prop {
     defaultValue?: string;
 }
 
+export interface Action {
+    name: string;
+}
+
 export interface SvelteInformations {
     props: Array<Prop>;
+    actions: Array<Action>;
 }
