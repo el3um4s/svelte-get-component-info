@@ -7,7 +7,7 @@ function getActions(s:string):Action {
 
 function getActionName(s:string):string {
     const action:string = s.trim().substring(1).trim();
-    const name:string = action.substring(1,action.length-1);
+    const name:string = action.substring(0,action.length-1);
     return name;
 }
 

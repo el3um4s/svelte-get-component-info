@@ -73,6 +73,10 @@
       text: "Hello!",
     });
   }
+
+  function calc() {
+    dispatch("calc");
+  }
 </script>
 
 <button on:click={sayHello}>Fire Event</button>
@@ -86,3 +90,16 @@
 </div>
 
 <button on:click={() => dispatch("claps", "detail value")}>Fire Event</button>
+
+<div
+  on:mouseenter={() => {
+    dispatch("mouse-enter");
+  }}
+  on:mouseleave={() => dispatch("mouse-leave")}
+>
+  Hello
+</div>
+
+<div on:click={(e) => dispatch("mouse-enter", { info: "yeah" })}>
+  Click me and I will dispatch
+</div>

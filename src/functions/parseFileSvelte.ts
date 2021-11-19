@@ -1,7 +1,7 @@
 const regex = {
         script: /<script[\s\S]*?>[\s\S]*?<\/script>/gi,
         propsGeneric: /export let [\s\S]*?;/gi,
-        actionsGeneric: /(?<=dispatch)(.*?)(?=,)/gi
+        actionsGeneric: /(?<=dispatch[.(])(.*?)(?=,|\))/gi
 };
 
 function hasProps(component:string):boolean {

@@ -1,18 +1,18 @@
 import { getActionName } from "../functions/parseActions";
 
 const listTest: Array<{text: string, expectedAction:string}> = [
-    { text: `('notify'`, expectedAction: `notify`},
-    { text: ` ('message'`, expectedAction: `message`},
-    { text: `("notify"`, expectedAction: `notify`},
-    { text: ` ("message"`, expectedAction: `message`},
-    { text: '(`notify`', expectedAction: `notify`},
-    { text: ' (`message`', expectedAction: `message`},
-    { text: `( 'notify'`, expectedAction: `notify`},
-    { text: ` ( 'message'`, expectedAction: `message`},
-    { text: `( "notify"`, expectedAction: `notify`},
-    { text: ` ( "message"`, expectedAction: `message`},
-    { text: '( `notify`', expectedAction: `notify`},
-    { text: ' ( `message`', expectedAction: `message`},
+    { text: `'notify'`, expectedAction: `notify`},
+    { text: ` 'message'`, expectedAction: `message`},
+    { text: `"notify"`, expectedAction: `notify`},
+    { text: ` "message"`, expectedAction: `message`},
+    { text: '`notify`', expectedAction: `notify`},
+    { text: ' `message`', expectedAction: `message`},
+    { text: ` 'notify'`, expectedAction: `notify`},
+    { text: `  'message'`, expectedAction: `message`},
+    { text: ` "notify"`, expectedAction: `notify`},
+    { text: `  "message"`, expectedAction: `message`},
+    { text: ' `notify`', expectedAction: `notify`},
+    { text: '  `message`', expectedAction: `message`},
 ];
 
 describe("Get actions", () => {

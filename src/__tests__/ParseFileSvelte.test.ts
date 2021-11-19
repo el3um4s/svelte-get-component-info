@@ -67,7 +67,7 @@ describe("Parse Svelte - SCRIPTS - Checks Actions", () => {
         expect(actions).toBeTruthy();
         const listActions: string[] = getActions_asInFile(content);
         expect(listActions.length).toBe(1);
-        expect(listActions[0].trim()).toBe(`("message"`);
+        expect(listActions[0].trim()).toBe(`"message"`);
     });
 
     test("check has actions TS", () => {
@@ -77,7 +77,7 @@ describe("Parse Svelte - SCRIPTS - Checks Actions", () => {
         expect(actions).toBeTruthy();
         const listActions: string[] = getActions_asInFile(content);
         expect(listActions.length).toBe(1);
-        expect(listActions[0].trim()).toBe(`("message"`);
+        expect(listActions[0].trim()).toBe(`"message"`);
     });
 
     test("check has actions NO ACTIONS", () => {
@@ -104,6 +104,6 @@ describe("Parse Svelte - SCRIPTS - Checks Actions", () => {
         const file_no = getActions_asInFile(readFileSvelte(listFiles.component_NO_SCRIPT).content.content);
         expect(file_no.length).toBe(0);
         const file_multi = getActions_asInFile(readFileSvelte(listFiles.component_MULTI).content.content);
-        expect(file_multi.length).toBe(5);
+        expect(file_multi.length).toBe(9);
     });
 });

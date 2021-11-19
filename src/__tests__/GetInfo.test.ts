@@ -186,8 +186,11 @@ const listCheckValuesProps: Array<Prop> = [
 const listCheckValueActions: Array<Action> = [
     { name: "message" },
     { name: "notify" },
+    { name: "calc" },
     { name: "claps" },
-    { name: "click" } 
+    { name: "click" } ,
+    { name: "mouse-enter" }, 
+    { name: "mouse-leave" } 
 ];
 
 describe("Parse svelte files - SCRIPTS", () => {
@@ -241,9 +244,9 @@ describe("Parse svelte files - ACTIONS", () => {
         expect(result.actions.length).toBe(1);
     });
 
-    test("parse file with 4 actions (TS)", () => {
+    test("parse file with 7 actions (TS)", () => {
         const result:SvelteInformations = getInfo(listFiles.component_MULTI);
-        expect(result.actions.length).toBe(4);
+        expect(result.actions.length).toBe(7);
     });
 });
 
