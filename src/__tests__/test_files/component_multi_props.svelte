@@ -103,3 +103,25 @@
 <div on:click={(e) => dispatch("mouse-enter", { info: "yeah" })}>
   Click me and I will dispatch
 </div>
+
+<div>
+  <slot>
+    this fallback content will be rendered when no content is provided, like in
+    the first example
+  </slot>
+</div>
+<div>
+  <slot name="header">No header was provided</slot>
+  <p>Some content between header and footer</p>
+  <slot name="footer" />
+</div>
+
+<div>
+  <slot />
+</div>
+
+<div>
+  <slot name="header">No header was provided</slot>
+  <p>Some content between header and footer</p>
+  <slot name="footer" />
+</div>

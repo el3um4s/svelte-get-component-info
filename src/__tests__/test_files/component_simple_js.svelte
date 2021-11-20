@@ -7,3 +7,7 @@
 </script>
 
 <button on:click={() => dispatch("message", "detail value")}>Fire Event</button>
+
+<div>
+  <slot />
+</div>

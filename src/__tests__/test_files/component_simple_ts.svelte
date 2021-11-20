@@ -13,3 +13,7 @@
 </script>
 
 <button on:click={sayHello}>Fire Event</button>
+
+<div>
+  <slot />
+</div>

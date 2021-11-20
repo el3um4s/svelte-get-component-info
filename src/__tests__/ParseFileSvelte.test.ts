@@ -1,5 +1,5 @@
 import { readFileSvelte } from "../functions/readFileSvelte";
-import { hasProps, getProps_asInFile, hasActions, getActions_asInFile } from "../functions/parseFileSvelte";
+import { hasProps, getProps_asInFile, hasActions, getActions_asInFile, hasSlots, getSlots_asInFile } from "../functions/parseFileSvelte";
 import type { Content } from "../functions/interfaces";
 
 
@@ -10,7 +10,7 @@ const listFiles = {
     component_MULTI: "src/__tests__/test_files/component_multi_props.svelte"
 };
 
-describe("Parse Svelte - SCRIPTS - Checks Props", () => {
+describe("Parse Svelte - Checks Props", () => {
     test("check has props JS", () => {
         const file: Content = readFileSvelte(listFiles.component_JS);
         const content: string = file.content.content;
@@ -59,7 +59,7 @@ describe("Parse Svelte - SCRIPTS - Checks Props", () => {
     });
 });
 
-describe("Parse Svelte - SCRIPTS - Checks Actions", () => {
+describe("Parse Svelte - Checks Actions", () => {
     test("check has actions JS", () => {
         const file: Content = readFileSvelte(listFiles.component_JS);
         const content: string = file.content.content;
@@ -105,5 +105,55 @@ describe("Parse Svelte - SCRIPTS - Checks Actions", () => {
         expect(file_no.length).toBe(0);
         const file_multi = getActions_asInFile(readFileSvelte(listFiles.component_MULTI).content.content);
         expect(file_multi.length).toBe(9);
+    });
+});
+
+
+describe("Parse Svelte - Checks Slots", () => {
+    test("check has slots JS", () => {
+        const file: Content = readFileSvelte(listFiles.component_JS);
+        const content: string = file.content.content;
+        const slots: boolean = hasSlots(content);
+        expect(slots).toBeTruthy();
+        const listSlots: string[] = getSlots_asInFile(content);
+        expect(listSlots.length).toBe(1);
+        expect(listSlots[0].trim()).toBe(`<slot />`);
+    });
+
+    test("check has slots TS", () => {
+        const file: Content = readFileSvelte(listFiles.component_TS);
+        const content: string = file.content.content;
+        const slots: boolean = hasSlots(content);
+        expect(slots).toBeTruthy();
+        const listSlots: string[] = getSlots_asInFile(content);
+        expect(listSlots.length).toBe(1);
+        expect(listSlots[0].trim()).toBe(`<slot />`);
+    });
+
+    test("check has slots NO ACTIONS", () => {
+        const file: Content = readFileSvelte(listFiles.component_NO_SCRIPT);
+        const content: string = file.content.content;
+        const slots: boolean = hasSlots(content);
+        expect(slots).toBeFalsy();
+        const listSlots: string[] = getSlots_asInFile(content);
+        expect(listSlots.length).toBe(0);
+    });
+
+    test("check has slots MULTI", () => {
+        const file: Content = readFileSvelte(listFiles.component_MULTI);
+        const content: string = file.content.content;
+        const slots: boolean = hasSlots(content);
+        expect(slots).toBeTruthy();
+    });
+
+    test("count slots in files", () => {
+        const file_js = getSlots_asInFile(readFileSvelte(listFiles.component_JS).content.content);
+        expect(file_js.length).toBe(1);
+        const file_ts = getSlots_asInFile(readFileSvelte(listFiles.component_TS).content.content);
+        expect(file_ts.length).toBe(1);
+        const file_no = getSlots_asInFile(readFileSvelte(listFiles.component_NO_SCRIPT).content.content);
+        expect(file_no.length).toBe(0);
+        const file_multi = getSlots_asInFile(readFileSvelte(listFiles.component_MULTI).content.content);
+        expect(file_multi.length).toBe(6);
     });
 });
