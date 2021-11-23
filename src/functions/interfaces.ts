@@ -18,6 +18,11 @@ export interface Action {
     name: string;
 }
 
+export interface Slot {
+    anonymous: boolean;
+    name?: string;
+}
+
 export interface SvelteInformations {
     props: Array<Prop>;
     actions: Array<Action>;
