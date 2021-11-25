@@ -1,6 +1,6 @@
 import type { Action } from "./interfaces";
 
-function getActions(s:string):Action {
+function getActionInfo(s:string):Action {
     const name:string = getActionName(s);
     return {name};
 }
@@ -11,4 +11,4 @@ function getActionName(s:string):string {
     return name;
 }
 
-export { getActions, getActionName };
+export { getActionInfo, getActionName };

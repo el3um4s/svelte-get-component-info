@@ -1,12 +1,12 @@
 import {getInfo} from "../index";
 
-import {SvelteInformations, Prop, Action} from "../functions/interfaces";
+import {SvelteInformations, Prop, Action, Slot} from "../functions/interfaces";
 
 const listFiles = {
     component_JS: "src/__tests__/test_files/component_simple_js.svelte",
     component_TS: "src/__tests__/test_files/component_simple_ts.svelte",
     component_NO_SCRIPT: "src/__tests__/test_files/component_simple_no_script.svelte",
-    component_MULTI: "src/__tests__/test_files/component_multi_props.svelte"
+    component_MULTI: "src/__tests__/test_files/component_multi.svelte"
 };
 
 
@@ -193,6 +193,12 @@ const listCheckValueActions: Array<Action> = [
     { name: "mouse-leave" } 
 ];
 
+const listCheckValueSlot: Array<Slot> = [
+    { name: undefined, anonymous: true },
+    { name: "header", anonymous: false },
+    { name: "footer", anonymous: false }
+];
+
 describe("Parse svelte files - SCRIPTS", () => {
     test("parse file with no script", () => {
         const result:SvelteInformations = getInfo(listFiles.component_NO_SCRIPT);
@@ -254,8 +260,41 @@ describe("Parse Svelte - check actions", () => {
         const result:SvelteInformations = getInfo(listFiles.component_MULTI);
         const actions:Array<Action> = result.actions;
         actions.forEach((action:Action, index:number) => {
-            test(`check prop: name=${action.name}`, () => {
+            test(`check action: name=${action.name}`, () => {
                 expect(action.name).toBe(listCheckValueActions[index].name);
+            });
+        });
+});
+
+describe("Parse svelte files - SLOTS", () => {
+    test("parse file with no slot", () => {
+        const result:SvelteInformations = getInfo(listFiles.component_NO_SCRIPT);
+        expect(result.slots.length).toBe(0);
+    });
+    
+    test("parse file with only 1 slot (JS)", () => {
+        const result:SvelteInformations = getInfo(listFiles.component_JS);
+        expect(result.slots.length).toBe(1);
+    });
+
+    test("parse file with only 1 slot (TS)", () => {
+        const result:SvelteInformations = getInfo(listFiles.component_TS);
+        expect(result.slots.length).toBe(1);
+    });
+
+    test("parse file with 3 slots (TS)", () => {
+        const result:SvelteInformations = getInfo(listFiles.component_MULTI);
+        expect(result.slots.length).toBe(3);
+    });
+});
+
+describe("Parse Svelte - check slots", () => {
+        const result:SvelteInformations = getInfo(listFiles.component_MULTI);
+        const slots:Array<Slot> = result.slots;
+        slots.forEach((slot:Slot, index:number) => {
+            test(`check slot: name=${slot.name}, anonymous=${slot.anonymous}`, () => {
+                expect(slot.name).toBe(listCheckValueSlot[index].name);
+                expect(slot.anonymous).toBe(listCheckValueSlot[index].anonymous);
             });
         });
 });

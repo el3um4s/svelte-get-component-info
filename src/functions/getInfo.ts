@@ -1,8 +1,10 @@
 import { readFileSvelte } from "./readFileSvelte";
-import { getProps_asInFile, getActions_asInFile } from "./parseFileSvelte";
+import { getProps_asInFile, getActions_asInFile, getSlots_asInFile } from "./parseFileSvelte";
 import { getPropInfo } from "./parseProps";
-import { getActions } from "./parseActions";
-import { Content, Prop, Action, SvelteInformations } from "./interfaces";
+import { getActionInfo } from "./parseActions";
+import { getSlotInfo } from "./parseSlots";
+
+import { Content, Prop, Action, Slot, SvelteInformations } from "./interfaces";
 
 function getInfo(source: string):SvelteInformations {
     const file:Content = readFileSvelte(source);
@@ -13,7 +15,7 @@ function getInfo(source: string):SvelteInformations {
 
     const actionsAsInFile = getActions_asInFile(file.content.content);
     const actionsWithDuplicates:Array<Action> = [];
-    actionsAsInFile.forEach(a => actionsWithDuplicates.push(getActions(a)));
+    actionsAsInFile.forEach(a => actionsWithDuplicates.push(getActionInfo(a)));
     const act = new Set();
     const actions:Array<Action> = actionsWithDuplicates.filter( el => {
         const duplicate = act.has(el.name);
@@ -21,8 +23,18 @@ function getInfo(source: string):SvelteInformations {
         return !duplicate;
     });
 
-    return { props, actions };
+    const slotsInFile = getSlots_asInFile(file.content.content);
+    const slotsWithDuplicates:Array<Slot> = [];
+    slotsInFile.forEach(s => slotsWithDuplicates.push(getSlotInfo(s)));
+    const slot = new Set();
+    const slots:Array<Slot> = slotsWithDuplicates.filter( el => {
+        const duplicate = slot.has(el.name);
+        slot.add(el.name);
+        return !duplicate;
+    });
+
+
+    return { props, actions, slots };
 }
 
 export { getInfo };
-

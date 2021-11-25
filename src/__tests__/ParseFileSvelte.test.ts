@@ -7,7 +7,7 @@ const listFiles = {
     component_JS: "src/__tests__/test_files/component_simple_js.svelte",
     component_TS: "src/__tests__/test_files/component_simple_ts.svelte",
     component_NO_SCRIPT: "src/__tests__/test_files/component_simple_no_script.svelte",
-    component_MULTI: "src/__tests__/test_files/component_multi_props.svelte"
+    component_MULTI: "src/__tests__/test_files/component_multi.svelte"
 };
 
 describe("Parse Svelte - Checks Props", () => {

@@ -26,4 +26,5 @@ export interface Slot {
 export interface SvelteInformations {
     props: Array<Prop>;
     actions: Array<Action>;
+    slots: Array<Slot>;
 }

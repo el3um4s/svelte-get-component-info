@@ -41,9 +41,9 @@ It is still a work in progress project. My idea is to get an item like this:
         { "name": "customAction" }
     ],
     "slots": [
-        "",
-        "header",
-        "footer"
+        { "anonymous": true },
+        { "name": "header", "anonymous": false },
+        { "name": "footer", "anonymous": false }
     ]
 }
 ```
@@ -56,7 +56,7 @@ It is still a work in progress project. My idea is to get an item like this:
   - [x] defaultValue
   - [ ] class CSS
 - [x] actions
-- [ ] slots
-  - [ ] anonyms
-  - [ ] named
+- [x] slots
+  - [x] anonyms
+  - [x] named
 - [ ] css variables
