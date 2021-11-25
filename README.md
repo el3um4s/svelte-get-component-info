@@ -4,6 +4,8 @@ _A function to extract information about the props of a Svelte file. Designed to
 
 NPM link: [@el3um4s/svelte-get-component-info](https://www.npmjs.com/package/@el3um4s/svelte-get-component-info)
 
+I recommend using it with [el3um4s/svelte-component-info](https://github.com/el3um4s/svelte-component-info) (npm: [@el3um4s/svelte-component-info](https://www.npmjs.com/package/@el3um4s/svelte-component-info))
+
 ### Install and use the package
 
 To use the package in a project:
