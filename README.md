@@ -1,6 +1,6 @@
 # Svelte - Get Component Info
 
-_A function to extract information about the props of a Svelte file. Designed to simplify the creation of documentation_
+_A function to extract information about the props, actions, slots and css variables from a Svelte file. Designed to simplify the creation of documentation_
 
 NPM link: [@el3um4s/svelte-get-component-info](https://www.npmjs.com/package/@el3um4s/svelte-get-component-info)
 
@@ -25,9 +25,7 @@ console.log(info.props); //  [{ name: "message", type: "string", defaultValue: "
 console.log(info.actions); /// [ { name: "notify" }]
 ```
 
-### Note
-
-It is still a work in progress project. My idea is to get an item like this:
+`info` looks like this:
 
 ```json
 {
