@@ -85,13 +85,14 @@
 
 <button on:click={() => dispatch("claps", "detail value")}>Fire Event</button>
 
-<div on:click={(e) => dispatch("click", { info: "yeah" })}>
+<div on:click={(e) => dispatch("click", { info: "yeah" })} --green>
   Click me and I will dispatch
 </div>
 
 <button on:click={() => dispatch("claps", "detail value")}>Fire Event</button>
 
 <div
+  style="background-color: var(--color-background, red);"
   on:mouseenter={() => {
     dispatch("mouse-enter");
   }}
@@ -104,24 +105,46 @@
   Click me and I will dispatch
 </div>
 
-<div>
+<div style="background-color: var(--background, var(--color-background, red))">
   <slot>
     this fallback content will be rendered when no content is provided, like in
     the first example
   </slot>
 </div>
-<div>
+<div style="background-color: var(--background, green)">
   <slot name="header">No header was provided</slot>
   <p>Some content between header and footer</p>
   <slot name="footer" />
 </div>
 
-<div>
+<div --rail-color="goldenrod">
   <slot />
 </div>
 
-<div>
+<div style="background-color: var(--background)">
   <slot name="header">No header was provided</slot>
   <p>Some content between header and footer</p>
   <slot name="footer" />
 </div>
+
+<style>
+  div {
+    --main-bg-color: brown;
+  }
+  div {
+    background-color: var(--color-red, red);
+    color: var(--color-green, green);
+    font-size: var(--big);
+  }
+
+  /*
+  --yellow
+  --blue
+  --yellow-blue
+   */
+
+  div {
+    --color-red: red;
+    --color: #000;
+  }
+</style>

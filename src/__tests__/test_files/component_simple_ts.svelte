@@ -14,6 +14,6 @@
 
 <button on:click={sayHello}>Fire Event</button>
 
-<div>
+<div style="background-color: var(--color-background, red);">
   <slot />
 </div>

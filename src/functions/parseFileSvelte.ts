@@ -1,7 +1,8 @@
 const regex = {
     propsGeneric: /export let [\s\S]*?;/gi,
-    actionsGeneric: /(?<=dispatch[.(])(.*?)(?=,|\))/gi,
-    slotsGeneric: /<slot[\s\S]*?>/gi
+    actionsGeneric: /(?<=dispatch[.(])(.*?)(?=[,)])/gi,
+    slotsGeneric: /<slot[\s\S]*?>/gi,
+    cssGeneric: /(?=--)(.*?)(?=[,=)>:;\n\r\t\0])/gi
 };
 
 function hasProps(component:string):boolean {
@@ -34,4 +35,19 @@ function getSlots_asInFile(component:string): Array<string> {
     return content != null ? content : [];
 }
 
-export { hasProps, getProps_asInFile, hasActions, getActions_asInFile, hasSlots, getSlots_asInFile};
+function hasCSS(component:string):boolean {
+    const content = component.match(regex.cssGeneric);
+    return content != null;
+}
+
+function getCSS_asInFile(component:string): Array<string> {
+    const content = component.match(regex.cssGeneric);
+    return content != null ? content : [];
+}
+
+export { 
+    hasProps, getProps_asInFile, 
+    hasActions, getActions_asInFile, 
+    hasSlots, getSlots_asInFile,
+    hasCSS, getCSS_asInFile
+};

@@ -23,8 +23,13 @@ export interface Slot {
     name?: string;
 }
 
+export interface CSS {
+    name: string;
+}
+
 export interface SvelteInformations {
     props: Array<Prop>;
     actions: Array<Action>;
     slots: Array<Slot>;
+    css: Array<CSS>;
 }

@@ -1,5 +1,10 @@
 import { readFileSvelte } from "../functions/readFileSvelte";
-import { hasProps, getProps_asInFile, hasActions, getActions_asInFile, hasSlots, getSlots_asInFile } from "../functions/parseFileSvelte";
+import {
+    hasProps, getProps_asInFile,
+    hasActions, getActions_asInFile,
+    hasSlots, getSlots_asInFile,
+    hasCSS, getCSS_asInFile
+    } from "../functions/parseFileSvelte";
 import type { Content } from "../functions/interfaces";
 
 
@@ -155,5 +160,54 @@ describe("Parse Svelte - Checks Slots", () => {
         expect(file_no.length).toBe(0);
         const file_multi = getSlots_asInFile(readFileSvelte(listFiles.component_MULTI).content.content);
         expect(file_multi.length).toBe(6);
+    });
+});
+
+describe("Parse Svelte - Checks CSS VARIABLES", () => {
+    test("check has CSS VARIABLES JS", () => {
+        const file: Content = readFileSvelte(listFiles.component_JS);
+        const content: string = file.content.content;
+        const css: boolean = hasCSS(content);
+        expect(css).toBeTruthy();
+        const listCss: string[] = getCSS_asInFile(content);
+        expect(listCss.length).toBe(1);
+        expect(listCss[0].trim()).toBe(`--color-background`);
+    });
+
+    test("check has CSS VARIABLES TS", () => {
+        const file: Content = readFileSvelte(listFiles.component_TS);
+        const content: string = file.content.content;
+        const css: boolean = hasCSS(content);
+        expect(css).toBeTruthy();
+        const listCss: string[] = getCSS_asInFile(content);
+        expect(listCss.length).toBe(1);
+        expect(listCss[0].trim()).toBe(`--color-background`);
+    });
+
+    test("check has CSS VARIABLES NO VARIABLES", () => {
+        const file: Content = readFileSvelte(listFiles.component_NO_SCRIPT);
+        const content: string = file.content.content;
+        const css: boolean = hasCSS(content);
+        expect(css).toBeFalsy();
+        const listCss: string[] = getCSS_asInFile(content);
+        expect(listCss.length).toBe(0);
+    });
+
+    test("check has CSS VARIABLES MULTI", () => {
+        const file: Content = readFileSvelte(listFiles.component_MULTI);
+        const content: string = file.content.content;
+        const slots: boolean = hasCSS(content);
+        expect(slots).toBeTruthy();
+    });
+
+    test("count CSS VARIABLES in files", () => {
+        const file_js = getCSS_asInFile(readFileSvelte(listFiles.component_JS).content.content);
+        expect(file_js.length).toBe(1);
+        const file_ts = getCSS_asInFile(readFileSvelte(listFiles.component_TS).content.content);
+        expect(file_ts.length).toBe(1);
+        const file_no = getCSS_asInFile(readFileSvelte(listFiles.component_NO_SCRIPT).content.content);
+        expect(file_no.length).toBe(0);
+        const file_multi = getCSS_asInFile(readFileSvelte(listFiles.component_MULTI).content.content);
+        expect(file_multi.length).toBe(16);
     });
 });

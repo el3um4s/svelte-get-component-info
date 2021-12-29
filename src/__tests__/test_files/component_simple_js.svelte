@@ -11,3 +11,9 @@
 <div>
   <slot />
 </div>
+
+<style>
+  div {
+    background-color: var(--color-background, #fff);
+  }
+</style>

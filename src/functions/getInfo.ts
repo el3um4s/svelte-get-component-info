@@ -1,10 +1,11 @@
 import { readFileSvelte } from "./readFileSvelte";
-import { getProps_asInFile, getActions_asInFile, getSlots_asInFile } from "./parseFileSvelte";
+import { getProps_asInFile, getActions_asInFile, getSlots_asInFile, getCSS_asInFile } from "./parseFileSvelte";
 import { getPropInfo } from "./parseProps";
 import { getActionInfo } from "./parseActions";
 import { getSlotInfo } from "./parseSlots";
+import { getCSSInfo } from "./parseCSS";
 
-import { Content, Prop, Action, Slot, SvelteInformations } from "./interfaces";
+import { Content, Prop, Action, Slot, CSS, SvelteInformations } from "./interfaces";
 
 function getInfo(source: string):SvelteInformations {
     const file:Content = readFileSvelte(source);
@@ -33,8 +34,18 @@ function getInfo(source: string):SvelteInformations {
         return !duplicate;
     });
 
+    const cssInFile = getCSS_asInFile(file.content.content);
+    const cssWithDuplicates:Array<CSS> = [];
+    cssInFile.forEach(s => cssWithDuplicates.push(getCSSInfo(s)));
+    const c = new Set();
+    const css:Array<CSS> = cssWithDuplicates.filter( el => {
+        const duplicate = c.has(el.name);
+        c.add(el.name);
+        return !duplicate;
+    });
 
-    return { props, actions, slots };
+
+    return { props, actions, slots, css };
 }
 
 export { getInfo };

@@ -46,6 +46,10 @@ It is still a work in progress project. My idea is to get an item like this:
         { "anonymous": true },
         { "name": "header", "anonymous": false },
         { "name": "footer", "anonymous": false }
+    ],
+    "css": [
+      { "name": "--color-primary" },
+      { "name": "--color-secondary" }
     ]
 }
 ```
@@ -56,9 +60,8 @@ It is still a work in progress project. My idea is to get an item like this:
   - [x] name
   - [x] type
   - [x] defaultValue
-  - [ ] class CSS
 - [x] actions
 - [x] slots
   - [x] anonyms
   - [x] named
-- [ ] css variables
+- [x] css variables
